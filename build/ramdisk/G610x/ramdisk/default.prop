@@ -41,6 +41,6 @@ ro.config.hw_quickpoweron=true
 #
 # BOOTIMAGE_BUILD_PROPERTIES
 #
-ro.bootimage.build.date=Wed Mar 15 15:04:31 KST 2017
-ro.bootimage.build.date.utc=1489557871
-ro.bootimage.build.fingerprint=samsung/on7xeltedd/on7xelte:6.0.1/MMB29K/G610FDDU1AQC4:user/test-keys
+ro.bootimage.build.date=Tue May 16 16:07:04 KST 2017
+ro.bootimage.build.date.utc=1494918424
+ro.bootimage.build.fingerprint=samsung/on7xeltedd/on7xelte:6.0.1/MMB29K/G610FDDU1AQE4:user/test-keys
