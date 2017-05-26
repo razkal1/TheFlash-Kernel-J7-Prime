@@ -30,50 +30,15 @@ bldblu=${txtbld}$(tput setaf 4) # blue
 bldcya=${txtbld}$(tput setaf 6) # cyan
 txtrst=$(tput sgr0) # Reset
 
-# Program Start
-rm -rf ./build/build.log
-clear
-echo "${bldred}"
-echo " _ _ _ _ _ _                           _ _ _ _ _ _ _ _           _ _ _ _ _ _ _          |           |"
-echo "|                 |                   |               |		|                       |           |"
-echo "|                 |                   |               |		|                       |           |"
-echo "|_ _ _ _ _        |                   |               |		|                       |           |"
-echo "|                 |                   |_ _ _ _ _ _ _ _|		|_ _ _ _ _ _ _          |_ _ _ _ _ _|"
-echo "|                 |                   |               |                       |         |           |"
-echo "|                 |                   |               |                       |         |           |"
-echo "|                 |                   |               |                       |         |           |"
-echo "|                 |_ _ _ _ _ _ _      |               |		_ _ _ _ _ _ _ |         |           |"
-echo "                                                                                                           @SN"
-echo "${txtrst}"
-echo " ${bldblu} 0) Clean Workspace ${txtrst}"
-echo ""
-echo " ${bldblu} 1) Build Flash_Kernel boot.img for J7 Prime ${txtrst}"
-echo ""
-read -p " ${bldcya}Please select an option: ${txtrst}" prompt
-echo ""
-if [ $prompt == "0" ]; then
-	OPTION_0
-	echo ""
-	echo ""
-	echo ""
-	echo ""
-	. build.sh
-elif [ $prompt == "1" ]; then
-	OPTION_1
-	echo ""
-	echo ""
-	echo ""
-	echo ""
-	read -n 1 -s -p "Press any key to continue"
-fi
-
 # ---------
 # FUNCTIONS
 # ---------
 FUNC_CLEAN()
 {
-make clean
-make mrproper
+make -j$BUILD_JOB_NUMBER ARCH=$ARCH \
+	CROSS_COMPILE=$BUILD_CROSS_COMPILE clean
+make -j$BUILD_JOB_NUMBER ARCH=$ARCH \
+	CROSS_COMPILE=$BUILD_CROSS_COMPILE mrproper
 rm -f $RDIR/build/build.log
 rm -f $RDIR/build/build-G610x.log
 rm -rf $RDIR/arch/arm64/boot/dtb
@@ -239,3 +204,39 @@ if [ $1 == 1 ]; then
 	OPTION_1
 fi
 
+# Program Start
+rm -rf ./build/build.log
+clear
+echo "${bldred}"
+echo " _ _ _ _ _ _                           _ _ _ _ _ _ _ _           _ _ _ _ _ _ _          |           |"
+echo "|                 |                   |               |		|                       |           |"
+echo "|                 |                   |               |		|                       |           |"
+echo "|_ _ _ _ _        |                   |               |		|                       |           |"
+echo "|                 |                   |_ _ _ _ _ _ _ _|		|_ _ _ _ _ _ _          |_ _ _ _ _ _|"
+echo "|                 |                   |               |                       |         |           |"
+echo "|                 |                   |               |                       |         |           |"
+echo "|                 |                   |               |                       |         |           |"
+echo "|                 |_ _ _ _ _ _ _      |               |		_ _ _ _ _ _ _ |         |           |"
+echo "                                                                                                           @SN"
+echo "${txtrst}"
+echo " ${bldblu} 0) Clean Workspace ${txtrst}"
+echo ""
+echo " ${bldblu} 1) Build Flash_Kernel boot.img for J7 Prime ${txtrst}"
+echo ""
+read -p " ${bldcya}Please select an option: ${txtrst}" prompt
+echo ""
+if [ $prompt == "0" ]; then
+	OPTION_0
+	echo ""
+	echo ""
+	echo ""
+	echo ""
+	. build.sh
+elif [ $prompt == "1" ]; then
+	OPTION_1
+	echo ""
+	echo ""
+	echo ""
+	echo ""
+	read -n 1 -s -p "Press any key to continue"
+fi
