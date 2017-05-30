@@ -14,7 +14,6 @@ import /init.carrier.rc
 import /init.sec_debug.rc
 import /init.container.rc
 import /init.rilcommon.rc
-import init.supersu.rc
 
 on early-init
     # Set init and its forked children's oom_adj.
@@ -408,6 +407,7 @@ on post-fs
 on post-fs-data
 # [ SEC_SELINUX_PORTING COMMON
     # Reload SE Android Policy
+    setprop selinux.reload_policy 1
 
     # sec_efs_file
     mkdir /efs/sec_efs 0775 radio system
@@ -652,6 +652,7 @@ on post-fs-data
 # [ SEC_SELINUX_PORTING COMMON
     # reload_policy is move to above
     # Reload policy from /data/security if present.
+    #setprop selinux.reload_policy 1
 # ] SEC_SELINUX_PORTING COMMON
 
     # Set SELinux security contexts on upgrade or policy update
@@ -1681,6 +1682,7 @@ on property:sys.boot_completed=1
     
 # Reload SE Android Policy for MDM
 on property:persist.security.mdm.policy=1
+    setprop selinux.reload_policy 1
 # ] SEC_SELINUX_PORTING COMMON
 
 on property:sys.boot_completed=1
@@ -1764,5 +1766,3 @@ service iod /system/bin/iod
 on property:sys.boot_completed=1
     start iod
 
-# SuperSU:PATCH:279
-# SuperSU:STOCK:9125ec64e092d016d26c61cd7d90a53c7a6ed3c9
