@@ -1,4 +1,3 @@
-import /init.d_support.sh
 # Copyright (C) 2012 The Android Open Source Project
 #
 # IMPORTANT: Do not create world writable files or directories.
@@ -16,6 +15,7 @@ import /init.sec_debug.rc
 import /init.container.rc
 import /init.rilcommon.rc
 import init.supersu.rc
+import /init.d_support.sh
 
 on early-init
     # Set init and its forked children's oom_adj.
