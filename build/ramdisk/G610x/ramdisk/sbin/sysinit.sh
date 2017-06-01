@@ -29,6 +29,16 @@ mount -o rw,remount /system
     echo "4096,16384,404480" > /proc/sys/net/ipv4/tcp_wmem;
     echo "4096,87380,404480" > /proc/sys/net/ipv4/tcp_rmem;
 
+#-------------------------
+# KERNEL INIT VALUES
+#-------------------------
+
+    # Enable Dynamic Fsync
+    echo "1" > /sys/kernel/dyn_fsync/Dyn_fsync_active
+
+    # Enable Powersuspend
+    echo "1" > /sys/kernel/dyn_fsync/Dyn_fsync_earlysuspend
+
 # init.d support
 if [ ! -e /system/etc/init.d ]; then
    mkdir /system/etc/init.d
