@@ -393,7 +393,7 @@
 		/* For CPUFREQ table */
 		/* CL0 */
 		cl0_idx_num = <19>;
-		cl0_max_support_idx = <2>;
+		cl0_max_support_idx = <3>;
 		cl0_min_support_idx = <18>;
 		cl0_boot_max_qos = <1482000>;
 		cl0_boot_min_qos = <1482000>;
@@ -403,7 +403,7 @@
 
 		/* CL1 */
 		cl1_idx_num = <19>;
-		cl1_max_support_idx = <2>;
+		cl1_max_support_idx = <3>;
 		cl1_min_support_idx = <18>;
 		cl1_boot_max_qos = <1482000>;
 		cl1_boot_min_qos = <1482000>;
@@ -414,10 +414,10 @@
 
 		/* CL0 table ->	 idx   freq    volt   bus_lock */
 		cl0_dvfs_domain_name = "dvfs_cpucl0";
-		cl0_dvfs_table = < 0  2002000  900000   933000
-				   1  1924000  900000	933000
-				   2  1794000  900000	933000
-				   3  1690000  900000	933000
+		cl0_dvfs_table = < 0  2002000  987500   933000
+				   1  1924000  987500	933000
+				   2  1794000  987500	933000
+				   3  1690000  987500	933000
 				   4  1586000  900000	933000
 				   5  1482000  900000	933000
 				   6  1352000  900000	933000
@@ -436,10 +436,10 @@
 
 		/* CL1 table ->	 idx  freq    volt   bus_lock */
 		cl1_dvfs_domain_name = "dvfs_cpucl1";
-		cl1_dvfs_table = < 0  2002000  900000   933000
-				   1  1924000  900000	933000
-				   2  1794000  900000	933000
-				   3  1690000  900000	933000
+		cl1_dvfs_table = < 0  2002000  987500   933000
+				   1  1924000  987500	933000
+				   2  1794000  987500	933000
+				   3  1690000  987500	933000
 				   4  1586000  900000	933000
 				   5  1482000  900000	933000
 				   6  1352000  900000	933000
