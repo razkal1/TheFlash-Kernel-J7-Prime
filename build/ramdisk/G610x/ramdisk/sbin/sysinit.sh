@@ -55,6 +55,10 @@ mount -o rw,remount /system
 
     # Enable Powersuspend
     echo "1" > /sys/kernel/dyn_fsync/Dyn_fsync_earlysuspend
+	
+# mediakill (Credits: lyapota)
+killall -9 android.process.media
+killall -9 mediaserver
 
 # init.d support
 if [ ! -e /system/etc/init.d ]; then
