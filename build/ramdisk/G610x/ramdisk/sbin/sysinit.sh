@@ -1,5 +1,15 @@
 #!/system/bin/sh
 
+# Busybox
+if [ -e /su/xbin/busybox ]; then
+	BB=/su/xbin/busybox;
+else if [ -e /sbin/busybox ]; then
+	BB=/sbin/busybox;
+else
+	BB=/system/xbin/busybox;
+fi;
+fi;
+
 mount -o remount,rw /;
 mount -o rw,remount /system
 
