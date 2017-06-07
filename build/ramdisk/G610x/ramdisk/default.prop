@@ -21,6 +21,15 @@ debug.atrace.tags.enableflags=0
 wlan.wfd.hdcp = disable
 ro.securestorage.support=false
 
+#Disable Android Logging
+debugtool.anrhistory=0
+profiler.debugmonitor=false
+profiler.launch=false
+profiler.hung.dumpdobugreport=false
+
+# Disable logcat
+logcat.live=disable
+
 #
 # BOOTIMAGE_BUILD_PROPERTIES
 #
