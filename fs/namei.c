@@ -505,24 +505,6 @@ static bool path_connected(const struct path *path)
 	return is_subdir(path->dentry, mnt->mnt_root);
 }
 
-/**
- * path_connected - Verify that a path->dentry is below path->mnt.mnt_root
- * @path: nameidate to verify
- *
- * Rename can sometimes move a file or directory outside of a bind
- * mount, path_connected allows those cases to be detected.
- */
-static bool path_connected(const struct path *path)
-{
-	struct vfsmount *mnt = path->mnt;
-
-	/* Only bind mounts can have disconnected paths */
-	if (mnt->mnt_root == mnt->mnt_sb->s_root)
-		return true;
-
-	return is_subdir(path->dentry, mnt->mnt_root);
-}
-
 /*
  * Path walking has 2 modes, rcu-walk and ref-walk (see
  * Documentation/filesystems/path-lookup.txt).  In situations when we can't
