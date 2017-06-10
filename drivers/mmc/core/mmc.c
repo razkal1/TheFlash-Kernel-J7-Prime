@@ -1333,6 +1333,7 @@ EXPORT_SYMBOL(tuning_blk_pattern_8bit);
 static int mmc_hs200_tuning(struct mmc_card *card)
 {
 	struct mmc_host *host = card->host;
+	int err = 0;
 
 	/*
 	 * Timing should be adjusted to the HS400 target

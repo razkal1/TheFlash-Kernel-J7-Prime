@@ -509,13 +509,11 @@ static int _snd_timer_stop(struct snd_timer_instance *timeri, int event)
 		return -ENXIO;
 
 	if (timeri->flags & SNDRV_TIMER_IFLG_SLAVE) {
-		if (!keep_flag) {
 			spin_lock_irqsave(&slave_active_lock, flags);
 			timeri->flags &= ~SNDRV_TIMER_IFLG_RUNNING;
 			list_del_init(&timeri->ack_list);
 			list_del_init(&timeri->active_list);
 			spin_unlock_irqrestore(&slave_active_lock, flags);
-		}
 		goto __end;
 	}
 	timer = timeri->timer;
