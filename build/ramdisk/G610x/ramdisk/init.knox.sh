@@ -28,3 +28,9 @@
 # Set Knox flag to 0x0
 /sbin/resetprop -v -n ro.boot.warranty_bit 0
 /sbin/resetprop -v -n ro.warranty_bit 0
+
+# Fix some safetynet flags
+/sbin/resetprop -n ro.boot.veritymode "enforcing"
+/sbin/resetprop -n ro.boot.verifiedbootstate "green"
+/sbin/resetprop -n ro.boot.flash.locked "1"
+/sbin/resetprop -n ro.boot.ddrinfo "00000001"
