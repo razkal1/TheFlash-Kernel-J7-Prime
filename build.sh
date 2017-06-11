@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build Script By Tkkg1994
+# Build Script By Tkkg1994 and djb77
 # Modified by TheFlash / XDA Developers
 
 # ---------
