@@ -133,6 +133,11 @@ static struct sk_buff **gre_gro_receive(struct sk_buff **head,
 
 	NAPI_GRO_CB(skb)->encap_mark = 1;
 
+	if (NAPI_GRO_CB(skb)->encap_mark)
+		goto out;
+
+	NAPI_GRO_CB(skb)->encap_mark = 1;
+
 	off = skb_gro_offset(skb);
 	hlen = off + sizeof(*greh);
 	greh = skb_gro_header_fast(skb, off);
