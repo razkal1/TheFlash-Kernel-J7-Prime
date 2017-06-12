@@ -1269,7 +1269,6 @@ static void snd_timer_user_tinterrupt(struct snd_timer_instance *timeri,
 	}
 	if ((tu->filter & (1 << SNDRV_TIMER_EVENT_RESOLUTION)) &&
 	    tu->last_resolution != resolution) {
-		memset(&r1, 0, sizeof(r1));
 		r1.event = SNDRV_TIMER_EVENT_RESOLUTION;
 		r1.tstamp = tstamp;
 		r1.val = resolution;
@@ -1887,18 +1886,6 @@ static long __snd_timer_user_ioctl(struct file *file, unsigned int cmd,
 		return snd_timer_user_pause(file);
 	}
 	return -ENOTTY;
-}
-
-static long __snd_timer_user_ioctl(struct file *file, unsigned int cmd,
-				 unsigned long arg)
-{
-	struct snd_timer_user *tu = file->private_data;
-	long ret;
-
-	mutex_lock(&tu->ioctl_lock);
-	ret = __snd_timer_user_ioctl(file, cmd, arg);
-	mutex_unlock(&tu->ioctl_lock);
-	return ret;
 }
 
 static long snd_timer_user_ioctl(struct file *file, unsigned int cmd,

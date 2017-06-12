@@ -254,24 +254,6 @@ ext4_xattr_check_block(struct inode *inode, struct buffer_head *bh)
 	return error;
 }
 
-static int
-__xattr_check_inode(struct inode *inode, struct ext4_xattr_ibody_header *header,
-			 void *end, const char *function, unsigned int line)
-{
-	struct ext4_xattr_entry *entry = IFIRST(header);
-	int error = -EIO;
-
-	if (((void *) header >= end) ||
-	    (header->h_magic != le32_to_cpu(EXT4_XATTR_MAGIC)))
-		goto errout;
-	error = ext4_xattr_check_names(entry, end, entry);
-errout:
-	if (error)
-		__ext4_error_inode(inode, function, line, 0,
-				   "corrupted in-inode xattr");
-	return error;
-}
-
 #define xattr_check_inode(inode, header, end) \
 	__xattr_check_inode((inode), (header), (end), __func__, __LINE__)
 
