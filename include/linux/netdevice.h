@@ -1910,9 +1910,7 @@ struct napi_gro_cb {
 
 	/* Number of checksums via CHECKSUM_UNNECESSARY */
 	u8	csum_cnt:3;
-
-	/* Free the skb? */
-	u8	free:2;
+	
 #define NAPI_GRO_FREE		  1
 #define NAPI_GRO_FREE_STOLEN_HEAD 2
 
