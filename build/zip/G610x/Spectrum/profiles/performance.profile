@@ -1,10 +1,10 @@
 # Performance Profile
 
-   # Little CPU
+   # CPU 1
    chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
    echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
    chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-   echo 130000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+   echo 343000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
    chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
    echo 1690000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
    chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
@@ -32,13 +32,13 @@
    chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
    echo 1000000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
 
-   # Big CPU
+   # CPU 2
    chmod 644 /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
    echo interactive > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
    chmod 644 /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
-   echo 208000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
+   echo 343000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
    chmod 644 /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
-   echo 2600000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
+   echo 1690000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
    chmod 644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
    echo 80 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
    chmod 644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
@@ -64,25 +64,6 @@
    chmod 644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration
    echo 1000000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration
 
-   # CPU HOTPLUG
-   echo 1 > /sys/power/cpuhotplug/enabled
-
-   # GPU
-   chmod 644 /sys/devices/14ac0000.mali/max_clock
-   echo 650 > /sys/devices/14ac0000.mali/max_clock
-   chmod 644 /sys/devices/14ac0000.mali/min_clock
-   echo 260 > /sys/devices/14ac0000.mali/min_clock
-   chmod 644 /sys/devices/14ac0000.mali/power_policy
-   echo coarse_demand > /sys/devices/14ac0000.mali/power_policy
-   chmod 644 /sys/devices/14ac0000.mali/dvfs_governor
-   echo 1 > /sys/devices/14ac0000.mali/dvfs_governor
-   chmod 644 /sys/devices/14ac0000.mali/highspeed_clock
-   echo 419 > /sys/devices/14ac0000.mali/highspeed_clock
-   chmod 644 /sys/devices/14ac0000.mali/highspeed_load
-   echo 95 > /sys/devices/14ac0000.mali/highspeed_load
-   chmod 644 /sys/devices/14ac0000.mali/highspeed_delay
-   echo 1 > /sys/devices/14ac0000.mali/highspeed_delay
-
    # IO Scheduler
    echo zen > /sys/block/sda/queue/scheduler
    echo 1024 > /sys/block/sda/queue/read_ahead_kb
@@ -97,6 +78,3 @@
    echo 2 > /sys/kernel/power_suspend/power_suspend_mode
    echo 0 > /sys/class/lcd/panel/smart_on
    echo westwood > proc/sys/net/ipv4/tcp_congestion_control
-
-   # LMK
-   echo "18432,23040,27648,32256,56064,81152" > /sys/module/lowmemorykiller/parameters/minfree

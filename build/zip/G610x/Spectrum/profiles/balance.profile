@@ -1,6 +1,6 @@
 # Balance Profile (Stock Values)
 
-   # Little CPU
+   # CPU 1
    chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
    echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
    chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
@@ -32,7 +32,7 @@
    chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
    echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
 
-   # Big CPU
+   # CPU 2
    chmod 644 /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
    echo interactive > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
    chmod 644 /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq

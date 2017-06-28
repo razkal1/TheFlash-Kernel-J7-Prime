@@ -1,0 +1,22 @@
+
+<u><b><#selectbg_g>TheFlash Kernel V5.0</#></b></u>
+<*>Built from a new stable branch</*>
+<*>Battery Life Super Awesome (Far better than stock or lazer)</*>
+<*>Linux 3.18.36</*>
+<*>Removed Unstable Hotplugging Drivers</*>
+<*>Reduced RQ Lock-Contention for upto 0.7% increase in Performance</*>
+<*>Optimized Integer SQRT. for upto 3x faster operation</*>
+<*>Optimized Console FrameBuffer for upto 70% increase in Performance</*>
+<*>crypto: crc32 - Add ARM64 CRC32 hw accelerated module (Improvement compared to crc32c-generic algorithm: ( TCRYPT CRC32C speed test shows ~450% speedup)</*>
+<*>arm64: crypto: increase AES interleave to 4x</*>
+<*>arm/arm64: crypto: boost performance</*>
+<*>deadline: optimize for non-rotational</*>
+<*>async i/o latency to a ssd (34% gain)</*>
+<*>block: Disable add_random</*>
+<*>Support for CRC-Toggle (Enabled by Default in Misc. TAB)- Disable "CRC-Check" for an improvement upto 30% faster I/O</*>
+<*>Removed OC (It uses superior battery)</*>
+<*>Impoved CPU volt distribution</*>
+<*>Relaxed cpu governor</*>
+<*>BFQ: Port BFQ-v8r10 to Android 3.18 kernel</*>
+<*>Under Hood Changes Optimization</*>
+<*>Removed Pre-Built Supersu</*>

@@ -1,0 +1,166 @@
+#########
+#
+# LICENSE:
+# Copyright (C) 2011 Ahmad Amarullah ( http://amarullz.com/ )
+# Initializing Rom Information
+#
+
+#########################################################################################
+# Inicio
+#
+# Configuracion pantalla
+ini_set("dp",				"8");
+ini_set("force_colorspace", "rgba");
+
+# Datos Rom
+ini_set("rom_name",         "TheFlashKernel");
+ini_set("rom_version",      "V5.1");
+ini_set("rom_author",       "TheFlash (Siddhant)");
+ini_set("rom_device",       "J7 PRIME (SM-G610x)");
+ini_set("rom_date",         "20/06/2017");
+
+# Splash
+# splash(4000,"splash/splash");
+
+# Fuentes
+fontresload( "0", "ttf/DroidSans.ttf;ttf/DroidSansArabic.ttf;ttf/DroidSansFallback.ttf;", "12" );
+fontresload( "1", "ttf/DroidSans.ttf;ttf/DroidSansArabic.ttf;ttf/DroidSansFallback.ttf;", "14" );
+
+# Tema
+theme("miui4");
+#theme("touchwiz");
+
+#Language
+loadlang("langs/en.lang");
+setvar("changelog", "changelog_en.txt");
+
+###
+# Welcome
+#
+
+viewbox(
+    "<~welcome.title>",
+    "<~welcome.text1> <b>"+ini_get("rom_name")+"</b> <~common.for> <b>"+ini_get("rom_device")+"</b>.\n\n"+
+        "<~welcome.text2>:\n\n"+
+        "   KERNEL  \t: <b><#selectbg_g>"+ini_get("rom_name")+"</#></b>\n"+
+        "   <~welcome.version>\t: <b><#selectbg_g>"+ini_get("rom_version")+"</#></b>\n"+
+        "   <~welcome.date>\t\t: <b><#selectbg_g>"+ini_get("rom_date")+"</#></b>\n"+
+        "   <~welcome.author>: <b><#selectbg_g>"+ini_get("rom_author")+"</#></b>\n\n"+
+        "<b><#f00><~welcome.text3> "+ini_get("rom_device")+"</#></b>\n\n\n"+    
+        "<~welcome.next>",
+    "@welcome"
+);
+
+
+###
+# Changelog
+#
+
+textbox(
+	"<~changelog.title>",
+	"<~changelog.desc>",
+	"@agreement",
+	resread(getvar("changelog"))
+);
+
+
+###
+# Installation
+#
+
+form(
+	"<~menu.title>",
+	"<~menu.desc>",
+	"@personalize",
+	"menu.prop",
+
+	"group1",     "<b><~menu.group1></b>",  "",                     	"group",
+	  "opt1",     "<b><~menu.1></b>",       "<~menu.1desc>",         	"select",
+	  "opt2",     "<b><~menu.2></b>",       "<~menu.2desc>",         	"select.selected",
+	  "opt3",     "<b><~menu.5></b>",       "<~menu.5desc>",         	"select",
+	"group2",     "<b><~menu.group2></b>",  "",                     	"group",
+	  "chk2",     "<b><~menu.3></b>",       "<~menu.3desc>",		"check.checked",
+	  "chk3",     "<b><~menu.6></b>",       "<~menu.6desc>",		"check.checked"
+);
+
+if prop("menu.prop", "group1") == "opt1" then
+
+	selectbox(
+		"<~stock.title>",
+		"<~stock.desc>",
+		"icons/default",
+		"stock.prop",
+		
+		"<b><~stock.group></b>", 	"",					2,	#-- Grupo 1
+		"<b><~stock.1></b>",		"<~stock.1desc>",	1,	#-- selected.1 = 1
+		"<b><~stock.2></b>",		"<~stock.2desc>",	0	#-- selected.1 = 2
+	);
+
+
+endif;
+
+if prop("menu.prop", "group1") == "opt2" then
+
+	selectbox(
+		"<~magisk.title>",
+		"<~magisk.desc>",
+		"icons/default",
+		"magisk.prop",
+		
+		"<b><~magisk.group></b>", 	"",					2,	#-- Grupo 1
+		"<b><~magisk.1></b>",		"<~magisk.1desc>",	0,	#-- selected.1 = 1
+		"<b><~magisk.2></b>",		"<~magisk.2desc>",	1	#-- selected.1 = 2
+	);
+
+
+endif;
+	
+
+#########################################################################################
+# Confirmation
+#
+
+viewbox(
+	"<~confirm.1>",
+	"\n\n<~confirm.2>\n\n"+
+	"<~confirm.3>",
+	"@flashing"
+);
+
+
+#########################################################################################
+# Installation
+#
+
+setvar("retstatus",
+	install(
+		"<~inst.1>",
+		"<b>"+ini_get("rom_name")+"</b>\n"+
+		"<~inst.2>",	
+		"@install",	
+		"<~inst.3>\n"+
+		"<~inst.4>"
+	)
+);
+
+
+#########################################################################################
+# Final
+#
+
+
+#set Next text fo Finish
+ini_set("text_next", "<~text_finish>");
+
+
+viewbox(
+	"",
+	"<#selectbg_g><b><~final.1></b></#>\n\n"+
+	"<b>"+ini_get("rom_name")+"</b> <~final.2>\n\n"+
+	"<~final.4>",
+	"@welcome"
+);
+
+
+
+
