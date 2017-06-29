@@ -23,15 +23,6 @@ ro.securestorage.support=false
 boot.fps=32
 shutdown.fps=30
 
-#Disable Android Logging
-debugtool.anrhistory=0
-profiler.debugmonitor=false
-profiler.launch=false
-profiler.hung.dumpdobugreport=false
-
-# Disable logcat
-logcat.live=disable
-
 #
 # BOOTIMAGE_BUILD_PROPERTIES
 #
