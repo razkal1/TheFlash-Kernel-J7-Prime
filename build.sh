@@ -106,20 +106,6 @@ echo ""
 
 FUNC_BUILD_RAMDISK()
 {
-# check if kernel build ok
-if [ ! -e $RDIR/arch/$ARCH/boot/Image ]; then
-	echo -e "\n${bldred}Kernel Not build! Check Build.log ${txtrst}\n"
-	grep -B 3 -C 6 -r error: $RDIR/build/build.log
-	grep -B 3 -C 6 -r warn $RDIR/build/build.log
-	read -n 1 -s -p "Press any key to continue"
-else if [ ! -e $RDIR/arch/$ARCH/boot/dtb.img ]; then
-	echo -e "\n${bldred}DTB Not Built! Check Build.log${txtrst}\n"
-	grep -B 3 -C 6 -r error:$RDIR/build/build.loguild/build.log
-	grep -B 3 -C 6 -r warn $RDIR/build/build.log
-	read -n 1 -s -p "Press any key to continue"
-fi
-fi
-
 if [ ! -f "$RDIR/build/ramdisk/G610x/ramdisk/config" ]; then
 	mkdir $RDIR/build/ramdisk/G610x/ramdisk/config
 	chmod 500 $RDIR/build/ramdisk/G610x/ramdisk/config
@@ -148,7 +134,23 @@ FUNC_BUILD_BOOTIMG()
 {
 	(
 	FUNC_BUILD_ZIMAGE
+if [ ! -e $RDIR/arch/$ARCH/boot/Image ]; then
+	echo -e "\n${bldred}Kernel Not build! Check Build.log ${txtrst}\n"
+	grep -B 3 -C 6 -r error: $RDIR/build/build.log
+	grep -B 3 -C 6 -r warn $RDIR/build/build.log
+	read -n 1 -s -p "Press any key to continue"
+	exit
+fi
+	echo -e "\n${bldred}Kernel Image Built Successfully ${txtrst}\n"
 	FUNC_BUILD_DTB
+if [ ! -e $RDIR/arch/$ARCH/boot/dtb.img ]; then
+	echo -e "\n${bldred}DTB Not Built! Check Build.log${txtrst}\n"
+	grep -B 3 -C 6 -r error:$RDIR/build/build.loguild/build.log
+	grep -B 3 -C 6 -r warn $RDIR/build/build.log
+	read -n 1 -s -p "Press any key to continue"
+	exit
+fi
+	echo -e "\n${bldred}DTB Image Built Successfully ${txtrst}\n"
 	FUNC_BUILD_RAMDISK
 	) 2>&1	 | tee -a $RDIR/build/build.log
 }
@@ -158,11 +160,7 @@ FUNC_BUILD_ZIP()
 echo ""
 echo "Building Zip File"
 cd $ZIP_FILE_DIR
-zip -gq $ZIP_NAME -r META-INF/ -x "*~"
-zip -gq $ZIP_NAME -r system/ -x "*~" 
-[ -f "$RDIR/build/$ZIPLOC/G610x/boot.img" ] && zip -gq $ZIP_NAME boot.img -x "*~"
-chmod a+r $ZIP_NAME
-mv -f $ZIP_FILE_TARGET $RDIR/build/$ZIP_NAME
+zip -9 -r $RDIR/build/$ZIP_NAME *
 cd $RDIR
 }
 
@@ -179,7 +177,7 @@ mv -f $RDIR/build/ramdisk/G610x/image-new.img $RDIR/build/$ZIPLOC/G610x/boot.img
 mv -f $RDIR/build/build.log $RDIR/build/build-G610x.log
 ZIP_DATE=`date +%Y%m%d`
 ZIP_FILE_DIR=$RDIR/build/$ZIPLOC/G610x
-ZIP_NAME=$KERNELNAME.G610x.v$VERSION_NUMBER.$ZIP_DATE.zip
+ZIP_NAME=$KERNELNAME.G610x.v$VERSION_NUMBER.zip
 ZIP_FILE_TARGET=$ZIP_FILE_DIR/$ZIP_NAME
 FUNC_BUILD_ZIP
 END_TIME=`date +%s`
