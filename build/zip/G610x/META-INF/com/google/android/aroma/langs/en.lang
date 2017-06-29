@@ -114,7 +114,7 @@ magisk.2desc=Erase data from Magisk and do clean installation.
 
 # Confirmar
 confirm.1=CONFIRM
-confirm.2=PRESS <b>Back</b> IF YOU WANT TO MAKE SOME CHANGE
+confirm.2=<b><#f00>YOU MAY NEED TO FORMAT /DATA AFTER FLASHING KERNEL IF YOU ARE ON STOCK ROM TO PREVENT BOOTLOOPS (NOT NECESSARY IF YOU CAN MOUNT /DATA IN TWRP)</#></b>
 confirm.3=PRESS <b>Next</b> TO CONTINUE AND START THE INSTALATION
 
 # Instalación

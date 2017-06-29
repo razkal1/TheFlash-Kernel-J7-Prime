@@ -133,14 +133,14 @@ viewbox(
 #
 
 setvar("retstatus",
-	install(
-		"<~inst.1>",
-		"<b>"+ini_get("rom_name")+"</b>\n"+
-		"<~inst.2>",	
-		"@install",	
-		"<~inst.3>\n"+
-		"<~inst.4>"
-	)
+    install(
+        "<~inst.1>",
+        "<b>"+ini_get("rom_name")+"</b>\n"+
+        "<~inst.2>",    
+        "@install", 
+        "<~inst.3>\n"+
+        "<~inst.4>"
+    )
 );
 
 

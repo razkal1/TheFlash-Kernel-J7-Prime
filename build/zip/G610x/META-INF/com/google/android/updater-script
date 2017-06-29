@@ -7,7 +7,6 @@ ui_print("* FAST|STABLE|SMOOTH");
 ui_print("***********************************************");
 set_progress(0.01);
 
-
 if is_mounted("/system") == "/system" then
     assert(run_program("/sbin/busybox", "umount", "/system"));
 endif;
@@ -15,11 +14,10 @@ endif;
 if is_mounted("/data") == "/data" then
     assert(run_program("/sbin/busybox", "umount", "/data"));
 endif;
-	
+    
 ui_print("--- Mounting partitions");
 run_program("/sbin/mount", "/system");
 run_program("/sbin/mount", "/data");
-run_program("/sbin/mount", "/sdcard");
 
 ui_print("--- Flashing kernel");
 package_extract_file("boot.img", "/dev/block/platform/13540000.dwmmc0/by-name/BOOT");
@@ -45,20 +43,20 @@ run_program("/tmp/flash/busybox.sh");
 
 # Flash Kernel Manager
 if file_getprop("/tmp/aroma/menu.prop", "chk2") == "1" then
-	ui_print("--- Flash Kernel Manager");
-	run_program("/tmp/flash/clean_kernelmanager.sh");
-	run_program("/tmp/flash/clean.sh", "kernelmanager");
-	package_extract_dir("kernelmanager", "/data/app");
-	set_metadata_recursive("/data/app/com.flash.kernelmanager-1", "uid", 1000, "gid", 1000, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+    ui_print("--- Flash Kernel Manager");
+    run_program("/tmp/flash/clean_kernelmanager.sh");
+    run_program("/tmp/flash/clean.sh", "kernelmanager");
+    package_extract_dir("kernelmanager", "/data/app");
+    set_metadata_recursive("/data/app/com.flash.kernelmanager-1", "uid", 1000, "gid", 1000, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 endif;
 
 # Spectrum
 if file_getprop("/tmp/aroma/menu.prop", "chk3") == "1" then
-	ui_print("--- Spectrum App");
-	run_program("/tmp/flash/clean_spectrum.sh");
-	run_program("/tmp/flash/clean.sh", "spectrum");
-	package_extract_dir("Spectrum/app", "/data/app");
-	set_metadata_recursive("/data/app/org.frap129.spectrum-1", "uid", 1000, "gid", 1000, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+    ui_print("--- Spectrum App");
+    run_program("/tmp/flash/clean_spectrum.sh");
+    run_program("/tmp/flash/clean.sh", "spectrum");
+    package_extract_dir("Spectrum/app", "/data/app");
+    set_metadata_recursive("/data/app/org.frap129.spectrum-1", "uid", 1000, "gid", 1000, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 endif;
 
 
@@ -69,58 +67,57 @@ set_progress(0.10);
 
 # Stock
 if file_getprop("/tmp/aroma/menu.prop", "group1") == "opt1" then
-	if file_getprop("/tmp/aroma/stock.prop","selected.1") == "2" then
-		ui_print("--- Without Root");
-		ui_print("   '-> Clearing previous root");
-		run_program("/tmp/flash/clean_su.sh");
-		run_program("/tmp/flash/clean_magisk_apps.sh");
-		run_program("/tmp/flash/clean.sh", "magisk");
-		run_program("/tmp/flash/clean_supersu_app.sh");
-		run_program("/tmp/flash/clean.sh", "supersu");
-	endif;
+    if file_getprop("/tmp/aroma/stock.prop","selected.1") == "2" then
+        ui_print("--- Without Root");
+        ui_print("   '-> Clearing previous root");
+        run_program("/tmp/flash/clean_su.sh");
+        run_program("/tmp/flash/clean_magisk_apps.sh");
+        run_program("/tmp/flash/clean.sh", "magisk");
+        run_program("/tmp/flash/clean_supersu_app.sh");
+        run_program("/tmp/flash/clean.sh", "supersu");
+    endif;
 endif;
 
-	
+    
 # Magisk Root
 if file_getprop("/tmp/aroma/menu.prop", "group1") == "opt2" then
-show_progress(0.95, "-8000");
-	ui_print("--- Rooting with Magisk Manager");
+show_progress(0.95, "-25000");
+    ui_print("--- Rooting with Magisk Manager");
 
-	ui_print("--- Clearing previous root");
-	run_program("/tmp/flash/clean_su.sh");
-	run_program("/tmp/flash/clean_supersu_app.sh");
-	run_program("/tmp/flash/clean.sh", "supersu");
+    ui_print("--- Clearing previous root");
+    run_program("/tmp/flash/clean_su.sh");
+    run_program("/tmp/flash/clean_supersu_app.sh");
+    run_program("/tmp/flash/clean.sh", "supersu");
 
-	if file_getprop("/tmp/aroma/magisk.prop","selected.1") == "2" then
+    if file_getprop("/tmp/aroma/magisk.prop","selected.1") == "2" then
+        
+        ui_print("--- Clearing magisk data");
+        run_program("/tmp/flash/clean_magisk_apps.sh");
 		
-		ui_print("--- Clearing magisk data");
-		run_program("/tmp/flash/clean_magisk_apps.sh");
-		run_program("/tmp/flash/clean.sh", "magisk");
-
 	endif;
-		
-	ui_print("--- Magisk");
-	ui_print(" ");
-	package_extract_dir("magisk", "/tmp/flash/magisk");
-	run_program("/sbin/busybox", "unzip", "/tmp/flash/magisk/magisk.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/flash/magisk");
-	run_program("/sbin/busybox", "sh", "/tmp/flash/magisk/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/flash/magisk/magisk.zip");
+    
+    ui_print("--- Magisk");
+    ui_print(" ");
+    package_extract_dir("magisk", "/tmp/flash/magisk");
+    run_program("/sbin/busybox", "unzip", "/tmp/flash/magisk/magisk.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/flash/magisk");
+    run_program("/sbin/busybox", "sh", "/tmp/flash/magisk/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/flash/magisk/magisk.zip");
 endif;
 
 # SuperSU Root
 if file_getprop("/tmp/aroma/menu.prop", "group1") == "opt3" then
 show_progress(0.95, "-34000");
-	ui_print("--- Rooting with SuperSU");
-	
-	ui_print("--- Clearing previous root");
-	run_program("/tmp/flash/clean_su.sh");
-	run_program("/tmp/flash/clean_magisk_apps.sh");
-	run_program("/tmp/flash/clean.sh", "magisk");
-			
-	ui_print("--- SuperSU");
-	ui_print(" ");
-	package_extract_dir("supersu", "/tmp/flash/supersu");
-	run_program("/sbin/busybox", "unzip", "/tmp/flash/supersu/supersu.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/flash/supersu");
-	run_program("/sbin/busybox", "sh", "/tmp/flash/supersu/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/flash/supersu/supersu.zip");
+    ui_print("--- Rooting with SuperSU");
+    
+    ui_print("--- Clearing previous root");
+    run_program("/tmp/flash/clean_su.sh");
+    run_program("/tmp/flash/clean_magisk_apps.sh");
+    run_program("/tmp/flash/clean.sh", "magisk");
+            
+    ui_print("--- SuperSU");
+    ui_print(" ");
+    package_extract_dir("supersu", "/tmp/flash/supersu");
+    run_program("/sbin/busybox", "unzip", "/tmp/flash/supersu/supersu.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/flash/supersu");
+    run_program("/sbin/busybox", "sh", "/tmp/flash/supersu/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/flash/supersu/supersu.zip");
 endif;
 set_progress(0.95);
 #####################################################
@@ -136,4 +133,3 @@ set_progress(1.00);
 ui_print(" ");
 ui_print("** Done **");
 ui_print(" ");
-
