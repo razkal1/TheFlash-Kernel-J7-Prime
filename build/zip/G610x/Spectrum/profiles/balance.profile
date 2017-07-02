@@ -76,5 +76,4 @@
    echo 0 > /sys/kernel/sched/gentle_fair_sleepers
    echo 1 > /sys/kernel/sched/arch_power
    echo 2 > /sys/kernel/power_suspend/power_suspend_mode
-   echo 0 > /sys/class/lcd/panel/smart_on
    echo bic > proc/sys/net/ipv4/tcp_congestion_control
